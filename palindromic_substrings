@@ -1,0 +1,44 @@
+public class PalindromePositions {
+    
+    public static void main(String[] args) {
+        String s = "madamracecar";
+
+        findPalindromes(s);
+    }
+
+    public static void findPalindromes(String s) {
+        int n = s.length();
+        int count = 0;
+
+        System.out.println("Palindromic Substrings:\n");
+
+        // Check all centers for odd & even length palindromes
+        for (int center = 0; center < n; center++) {
+            // Odd-length palindromes
+            count += expandAndPrint(s, center, center);
+
+            // Even-length palindromes
+            count += expandAndPrint(s, center, center + 1);
+        }
+
+        System.out.println("\nTotal Palindromes Found: " + count);
+    }
+
+    // Expand around center and print palindromes
+    public static int expandAndPrint(String s, int left, int right) {
+        int count = 0;
+
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            String pal = s.substring(left, right + 1);
+
+            System.out.println("Substring: \"" + pal + "\"  | Start: " + left + "  End: " + right);
+
+            count++;
+
+            left--;
+            right++;
+        }
+        return count;
+    }
+}
+
